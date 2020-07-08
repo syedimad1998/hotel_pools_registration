@@ -76,7 +76,7 @@
           <td> Grand Total</td>
           <td>{{ total[0] }}</td>
         </tr>
-        {% if total[0] > 32 %}
+        {% if total[0] > 160 %}
           <div class="alert">
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
           Pool has exceeded its Current Occupancy!
@@ -85,7 +85,9 @@
     </table>
     {% endif %}
     <h2> Occupancy! </h2>
-    <span>{{(total[0]/32)*100//1}} &#37;</span>
+    <span>{{(total[0]/160)*100//1}} &#37;</span>
+    <h2> Slots Left : </h2>
+    <span>{{160-total[0]}}</span>
 
     <div class="form">
         <form action="/" method="POST">
@@ -106,7 +108,7 @@
                <option value="Slot2">Slot2</option>
                <option value="Slot3">Slot3</option>
                <option value="Slot4">Slot4</option>
-               <option value="Slot2">Slot5</option>
+               <option value="Slot5">Slot5</option>
              </select>
             </p>
             <p>
