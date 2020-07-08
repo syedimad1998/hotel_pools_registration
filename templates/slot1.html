@@ -30,6 +30,7 @@
 </div>
 
 <div class="content">
+{% set total = [0] %}
 <table>
     <tr>
         <th>Slot</th>
@@ -83,5 +84,7 @@
       </div>
     {% endif %}
 </table>
+<h2> Occupancy! </h2>
+<span>{{(total[0]/32)*100//1}} &#37;</span>
 </div>
 {% endblock %}
