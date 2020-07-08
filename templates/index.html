@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>HOME</title>
+{% endblock %}
+
+{% block body %}
+<div style="text-align:center;padding:1em 0;"> <h2> <iframe  allowtransparency="true" style="background: #FFFFFF;" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=large&timezone=America%2FChicago&show=hour_minute" width="20%" height="140" frameborder="0" seamless></iframe> </div>
+<div class="forms">
+<form action="/slot1" method="post" style="display:inline-block">
+      <button class="button" name="showall"  type="submit"> Slot1</button>
+</form>
+<form action="/slot2" method="post" style="display:inline-block">
+      <button class="button button2" name="illustrator"  type="submit"> Slot2</button>
+</form>
+<form action="/slot3" method="post" style="display:inline-block">
+      <button class="button" name="showall"  type="submit"> Slot3</button>
+</form>
+<form action="/slot4" method="post" style="display:inline-block">
+      <button class="button button2" name="showall"  type="submit"> Slot4</button>
+</form>
+<form action="/slot5" method="post" style="display:inline-block">
+      <button class="button" name="showall"  type="submit"> Slot5</button>
+</form>
+</div>
+<div class="content">
+    <h1 style="text-align: center">Registrations for the Pool</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">There are no Guests Registered. Register one below!</h4>
+    {% else %}
+    {% set total = [0] %}
+    <table>
+        <tr>
+            <th>Slot</th>
+            <th>Room No</th>
+            <th>Name</th>
+            <th>No of Adults Registered</th>
+            <th>No of children Registered</th>
+            <th>Registration Time</th>
+            <th>Time Updated</th>
+            <th>Actions</th>
+            <th>Total</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.slot }}</td>
+                <td>{{ task.room_no }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.no_adults }}</td>
+                <td>{{ task.children }}</td>
+                <td>{{ task.time_created.strftime("%I:%M:%S %p") }}</td>
+                {% if task.time_updated == None %}
+                  <td>None</td>
+                {% else %}
+                  <td>{{ task.time_updated.strftime("%I:%M:%S %p") }}</td>
+                {% endif %}
+
+                <td>
+                    <a href="/delete/{{task.id}}" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+                <td>{{ task.no_adults + task.children }}</td>
+                {% set _ = total.append(total.pop() + task.no_adults + task.children) %}
+            </tr>
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td> Grand Total</td>
+          <td>{{ total[0] }}</td>
+        </tr>
+        {% if total[0] > 32 %}
+          <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Pool has exceeded its Current Occupancy!
+          </div>
+        {% endif %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+          <p>
+            <label>Name of the Guest</label>
+            <input type="text" name="name" id ="name">
+          </p>
+            <!-- <input type="text" name="content" id="content"> -->
+            <!-- <input type="submit" value="Add Name"> -->
+            <p>
+              <label>Enter the Room no of the Guest</label>
+              <input type="text" name="room_no" id ="room_no">
+            </p>
+            <p>
+             <label for="Slots">Choose a Slot:</label>
+             <select name="slot" id="slot">
+               <option value="Slot1">Slot1</option>
+               <option value="Slot2">Slot2</option>
+               <option value="Slot3">Slot3</option>
+               <option value="Slot4">Slot4</option>
+               <option value="Slot2">Slot5</option>
+             </select>
+            </p>
+            <p>
+              <label>No of Adults (between 1 and 5) </label>
+              <input type="number" name="no_adults" id ="no_adults" min="1" max="5">
+            </p>
+            <!-- <p>
+            <label for="quantity">No of Adults (between 1 and 5):</label>
+            <input type="number" id="quantity" name="quantity" >
+            </p> -->
+            <p>
+              <label>No of Children </label>
+              <input type="text" name="children" id ="children">
+            </p>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

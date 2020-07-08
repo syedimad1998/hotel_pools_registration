@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Update</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+  <form action="/update/{{task.id}}" method="POST">
+    <h1 style="text-align: center">Update Name</h1>
+
+    <div class="form">
+
+            <input type="text" name="name" id="name" value="{{task.name}}">
+            <!-- <input type="submit" value="Update"> -->
+
+    </div>
+    <div class="form">
+
+            <input type="text" name="room_no" id="room_no" value="{{task.room_no}}">
+            <!-- <input type="submit" value="Update"> -->
+
+    </div>
+    <div class="form">
+
+            <input type="text" name="no_adults" id="no_adults" value="{{task.no_adults}}">
+            <!-- <input type="submit" value="Update"> -->
+
+    </div>
+    <div class="form">
+
+            <input type="text" name="children" id="children" value="{{task.children}}">
+            <!-- <input type="submit" value="Update"> -->
+
+    </div>
+    <div>
+      <input type="submit" value="Update">
+    </div>
+  </form>
+</div>
+{% endblock %}

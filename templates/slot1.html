@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>SLOT</title>
+{% endblock %}
+
+{% block body %}
+
+<div style="text-align:center;padding:1em 0;"> <h2> <iframe  allowtransparency="true" style="background: #FFFFFF;" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=large&timezone=America%2FChicago&show=hour_minute" width="20%" height="140" frameborder="0" seamless></iframe> </div>
+
+<div class="forms">
+<form action="/" style="display:inline-block">
+      <button class="button homebtn" type="submit"> Home</button>
+</form>
+<form action="/slot1" method="post" style="display:inline-block">
+      <button class="button" name="showall"  type="submit"> Slot1</button>
+</form>
+<form action="/slot2" method="post" style="display:inline-block">
+      <button class="button button2" name="illustrator"  type="submit"> Slot2</button>
+</form>
+<form action="/slot3" method="post" style="display:inline-block">
+      <button class="button" name="showall"  type="submit"> Slot3</button>
+</form>
+<form action="/slot4" method="post" style="display:inline-block">
+      <button class="button button2" name="showall"  type="submit"> Slot4</button>
+</form>
+<form action="/slot5" method="post" style="display:inline-block">
+      <button class="button" name="showall"  type="submit"> Slot5</button>
+</form>
+</div>
+
+<div class="content">
+<table>
+    <tr>
+        <th>Slot</th>
+        <th>Room No</th>
+        <th>Name</th>
+        <th>No of Adults Registered</th>
+        <th>No of children Registered</th>
+        <th>Registration Time</th>
+        <th>Time Updated</th>
+        <th>Actions</th>
+        <th>Total</th>
+    </tr>
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.slot }}</td>
+            <td>{{ task.room_no }}</td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.no_adults }}</td>
+            <td>{{ task.children }}</td>
+            <td>{{ task.time_created.strftime("%I:%M:%S %p") }}</td>
+            {% if task.time_updated == None %}
+              <td>None</td>
+            {% else %}
+              <td>{{ task.time_updated.strftime("%I:%M:%S %p") }}</td>
+            {% endif %}
+
+            <td>
+                <a href="/delete/{{task.id}}" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                <br>
+                <a href="/update/{{task.id}}">Update</a>
+            </td>
+            <td>{{ task.no_adults + task.children }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}
