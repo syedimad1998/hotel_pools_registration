@@ -48,8 +48,28 @@ def index():
             return 'There was an issue adding your task'
 
     else:
+        slots1 = Todo.query.filter_by(slot='Slot1').all()
+        slots2 = Todo.query.filter_by(slot='Slot2').all()
+        slots3 = Todo.query.filter_by(slot='Slot3').all()
+        slots4 = Todo.query.filter_by(slot='Slot4').all()
+        slots5 = Todo.query.filter_by(slot='Slot5').all()
+        sum_slot1=0
+        sum_slot2=0
+        sum_slot3=0
+        sum_slot4=0
+        sum_slot5=0
+        for slot in slots1:
+            sum_slot1= sum_slot1 + slot.no_adults + slot.children
+        for slot in slots2:
+            sum_slot2= sum_slot2 + slot.no_adults + slot.children
+        for slot in slots3:
+            sum_slot3= sum_slot3 + slot.no_adults + slot.children
+        for slot in slots4:
+            sum_slot4= sum_slot4 + slot.no_adults + slot.children
+        for slot in slots5:
+            sum_slot5= sum_slot5 + slot.no_adults + slot.children
         tasks = Todo.query.order_by(Todo.time_created).all()
-        return render_template('index.html', tasks=tasks)
+        return render_template('index.html', tasks=tasks,sum_slot1=sum_slot1,sum_slot2=sum_slot2,sum_slot3=sum_slot3,sum_slot4=sum_slot4,sum_slot5=sum_slot5)
 
 
 @app.route('/delete/<int:id>')

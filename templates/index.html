@@ -9,19 +9,19 @@
 <div style="text-align:center;padding:1em 0;"> <h2> <iframe  allowtransparency="true" style="background: #FFFFFF;" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=large&timezone=America%2FChicago&show=hour_minute" width="20%" height="140" frameborder="0" seamless></iframe> </div>
 <div class="forms">
 <form action="/slot1" method="post" style="display:inline-block">
-      <button class="button" name="showall"  type="submit"> Slot1</button>
+      <button class="button" name="showall"  type="submit"> Slot1<br>1:30pm-2:30pm</button>
 </form>
 <form action="/slot2" method="post" style="display:inline-block">
-      <button class="button button2" name="illustrator"  type="submit"> Slot2</button>
+      <button class="button button2" name="illustrator"  type="submit"> Slot2<br>3:00pm-4:00pm</button>
 </form>
 <form action="/slot3" method="post" style="display:inline-block">
-      <button class="button" name="showall"  type="submit"> Slot3</button>
+      <button class="button" name="showall"  type="submit"> Slot3<br>4:30pm-5:30pm</button>
 </form>
 <form action="/slot4" method="post" style="display:inline-block">
-      <button class="button button2" name="showall"  type="submit"> Slot4</button>
+      <button class="button button2" name="showall"  type="submit"> Slot4<br>6:00pm-7:00pm</button>
 </form>
 <form action="/slot5" method="post" style="display:inline-block">
-      <button class="button" name="showall"  type="submit"> Slot5</button>
+      <button class="button" name="showall"  type="submit"> Slot5<br>7:30pm-8:30pm</button>
 </form>
 </div>
 <div class="content">
@@ -76,19 +76,114 @@
           <td> Grand Total</td>
           <td>{{ total[0] }}</td>
         </tr>
+        <!-- {% for slot in slots1 %}
+          <p>slot.
+        {% endfor %} -->
         {% if total[0] > 160 %}
           <div class="alert">
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          Pool has exceeded its Current Occupancy!
+          Pool has been reserved by all the guests!
           </div>
         {% endif %}
+        {% if sum_slot1 > 31 %}
+          <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Slot 1 is Full!
+          </div>
+        {% endif %}
+        {% if sum_slot2 > 31 %}
+          <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Slot 2 is Full!
+          </div>
+        {% endif %}
+        {% if sum_slot3 > 31 %}
+          <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Slot 3 is Full!
+          </div>
+        {% endif %}
+        {% if sum_slot4 > 31 %}
+          <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Slot 4 is Full!
+          </div>
+        {% endif %}
+        {% if sum_slot5 > 31 %}
+          <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Slot 5 is Full!
+          </div>
+        {% endif %}
+
     </table>
     {% endif %}
-    <h2> Occupancy! </h2>
+    <div>
+    <h2> Total Occupancy! </h2>
     <span>{{(total[0]/160)*100//1}} &#37;</span>
     <h2> Slots Left : </h2>
     <span>{{160-total[0]}}</span>
+    </div>
+    <!-- <div>
+    <h2> Slot3 Occupancy! </h2>
+    <span>{{(sum_slot3/32)*100//1}} &#37;</span>
+    <h2> Slots Left : </h2>
+    <span>{{32-sum_slot3}}</span>
+    </div>
+    <div>
+    <h2> Slot4 Occupancy! </h2>
+    <span>{{(sum_slot4/32)*100//1}} &#37;</span>
+    <h2> Slots Left : </h2>
+    <span>{{32-sum_slot4}}</span>
+    </div>
+    <h2> Slot5 Occupancy! </h2>
+    <span>{{(sum_slot5/32)*100//1}} &#37;</span>
+    <h2> Slots Left : </h2>
+    <span>{{32 - sum_slot5}}</span>
+    </div> -->
 
+<div class="row">
+  <div class="column">
+    <div class="card my_red_color">
+      <h3>Slot 1 Occupancy!</h3>
+      <p>{{(sum_slot1/32)*100//1}} &#37;</p>
+      <p>Slots Left : {{32-sum_slot1}}</p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card my_green_color">
+      <h3>Slot 2 Occupancy!</h3>
+      <p>{{(sum_slot2/32)*100//1}} &#37;</p>
+      <p>Slots Left : {{32-sum_slot2}} </p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card my_red_color">
+      <h3>Slot 3 Occupancy!</h3>
+      <p>{{(sum_slot3/32)*100//1}} &#37;</p>
+      <p>Slots Left : {{32-sum_slot3}}</p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card my_green_color">
+      <h3>Slot 4 Occupancy!</h3>
+      <p>{{(sum_slot4/32)*100//1}} &#37;</p>
+      <p>Slots Left : {{32-sum_slot4}}</p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card my_red_color">
+      <h3>Slot 5 Occupancy!</h3>
+      <p>{{(sum_slot5/32)*100//1}} &#37;</p>
+      <p>Slots Left : {{32-sum_slot5}}</p>
+    </div>
+  </div>
+</div>
+<h3 style="text-align: center">Signup here!</h3>
     <div class="form">
         <form action="/" method="POST">
           <p>
