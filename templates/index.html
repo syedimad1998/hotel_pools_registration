@@ -25,11 +25,11 @@
 </form>
 </div>
 <div class="content">
+  {% set total = [0] %}
     <h1 style="text-align: center">Registrations for the Pool</h1>
     {% if tasks|length < 1 %}
     <h4 style="text-align: center">There are no Guests Registered. Register one below!</h4>
     {% else %}
-    {% set total = [0] %}
     <table>
         <tr>
             <th>Slot</th>
@@ -188,13 +188,13 @@
         <form action="/" method="POST">
           <p>
             <label>Name of the Guest</label>
-            <input type="text" name="name" id ="name">
+            <input type="text" name="name" id ="name" required>
           </p>
             <!-- <input type="text" name="content" id="content"> -->
             <!-- <input type="submit" value="Add Name"> -->
             <p>
               <label>Enter the Room no of the Guest</label>
-              <input type="text" name="room_no" id ="room_no">
+              <input type="text" name="room_no" id ="room_no" required>
             </p>
             <p>
              <label for="Slots">Choose a Slot:</label>
@@ -208,7 +208,7 @@
             </p>
             <p>
               <label>No of Adults (between 1 and 5) </label>
-              <input type="number" name="no_adults" id ="no_adults" min="1" max="5">
+              <input type="number" name="no_adults" id ="no_adults" min="1" max="5" required>
             </p>
             <!-- <p>
             <label for="quantity">No of Adults (between 1 and 5):</label>
@@ -216,7 +216,7 @@
             </p> -->
             <p>
               <label>No of Children </label>
-              <input type="text" name="children" id ="children">
+              <input type="text" name="children" id ="children" required>
             </p>
             <br>
             <input type="submit" value="Submit">
