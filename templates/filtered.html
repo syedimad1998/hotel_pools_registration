@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Filtered</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+<div class="forms">
+<form action="/" style="display:inline-block">
+      <button class="button homebtn" type="submit"> Home</button>
+</form>
+</div>
+<table>
+    <tr>
+        <th>Slot</th>
+        <th>Room No</th>
+        <th>Name</th>
+        <th>No of Adults Registered</th>
+        <th>No of children Registered</th>
+        <th>Registration Time</th>
+        <th>Time Updated</th>
+        <th>Actions</th>
+        <th>Total</th>
+    </tr>
+{% for task in tasks %}
+    <tr>
+        <td>{{ task.slot }}</td>
+        <td>{{ task.room_no }}</td>
+        <td>{{ task.name }}</td>
+        <td>{{ task.no_adults }}</td>
+        <td>{{ task.children }}</td>
+        <td>{{ task.time_created.strftime("%I:%M:%S %p") }}</td>
+        {% if task.time_updated == None %}
+          <td>None</td>
+        {% else %}
+          <td>{{ task.time_updated.strftime("%I:%M:%S %p") }}</td>
+        {% endif %}
+
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}
